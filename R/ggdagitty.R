@@ -4,7 +4,7 @@ as_dag_coordinates = function(...) {
     coord_dag
 }
 
-dagify = function (..., labels, adjusted=c()) {
+dagify = function(..., labels, adjusted=c()) {
     if (missing(labels)) {
         dag = ggdag::dagify(...)
         edges = dagitty::edges(dag)
@@ -271,13 +271,18 @@ geom_dagitty_node = function(
     )
 }
 
-geom_node_label = function(nudge_y=0, color='black', bg.colour=alpha('white', 0.8)) {
+geom_node_label = function(
+    nudge_y=0, color='black', bg.colour=alpha('white', 0.8),
+    size=3.5,
+    ...
+) {
     shadowtext::geom_shadowtext(
         aes(label=label, y=y+{{nudge_y}}),
         check_overlap = TRUE,
-        size=3.5,
+        size=size,
         color=color,
-        bg.colour=bg.colour
+        bg.colour=bg.colour,
+        ...
     )
 }
 
